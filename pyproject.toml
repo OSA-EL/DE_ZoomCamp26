@@ -1,0 +1,16 @@
+[project]
+name = "de-zoomcamp26"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "panda>=0.3.1",
+    "pandas>=2.3.3",
+    "pyarrow>=22.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pgcli>=4.4.0",
+]
