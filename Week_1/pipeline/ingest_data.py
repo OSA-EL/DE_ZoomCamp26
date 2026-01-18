@@ -48,6 +48,10 @@ def run(pg_user, pg_pass, pg_host, pg_port, pg_db, year, month, target_table, ch
 
     engine = create_engine(f'postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}')
 
+
+
+
+
     df_iter = pd.read_csv(
         url,
         dtype=dtype,
@@ -72,6 +76,17 @@ def run(pg_user, pg_pass, pg_host, pg_port, pg_db, year, month, target_table, ch
             con=engine,
             if_exists='append'
         )
+
+        try:
+            df_zone = pd.read_csv(r'D:\Data\Data-ZoomCamp\New_DE26\DE_ZoomCamp26\Week_1\taxi_zone_lookup.csv')
+            print("Success! Loaded", len(df_zone), "rows")
+            print(df_zone.head())
+        except FileNotFoundError:
+            print("File not found! Check the path.")
+        except Exception as e:
+            print(f"Error: {e}")
+
+    df_zone.to_sql('taxi_zones', con=engine, if_exists='replace', index=False)
 
 if __name__ == '__main__':
     run()
