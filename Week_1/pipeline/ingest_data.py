@@ -63,7 +63,7 @@ def run(pg_user, pg_pass, pg_host, pg_port, pg_db, year, month, target_table, ch
             df_chunk.head(0).to_sql(
                 name=target_table,
                 con=engine,
-                if_exists='replace'
+                if_exists='append'
             )
             first = False
 
