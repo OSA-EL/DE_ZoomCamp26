@@ -2,10 +2,10 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-RUN pip install pandas pyarrow
+# Install dependencies
+RUN pip install pandas sqlalchemy psycopg2-binary tqdm click
 
-COPY ingestData.py .
+# Copy script
+COPY ingest_data.py .
 
-ENTRYPOINT ["python", "ingestData.py"]
-
-
+ENTRYPOINT ["python", "ingest_data.py"]
