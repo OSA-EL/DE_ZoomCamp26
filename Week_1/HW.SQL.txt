@@ -1,0 +1,46 @@
+-- Q3 
+
+-- SELECT COUNT(*) FROM green_trip_data
+-- WHERE lpep_pickup_datetime >= '2025-11-01' 
+--   AND lpep_pickup_datetime < '2025-12-01' 
+--   AND trip_distance <= 1
+
+-- Q4
+
+-- SELECT DATE(lpep_pickup_datetime) , MAX(trip_distance) as max_distance From green_taxi_2025 
+-- where trip_distance < 100 
+-- group by DATE(lpep_pickup_datetime)
+-- ORDER BY max_distance DESC
+-- LIMIT 1;
+
+-- Q5
+
+-- SELECT 
+--     tz."Zone", 
+--     SUM(gt.tolls_amount) AS total_amount 
+-- FROM taxi_zones tz 
+-- JOIN green_taxi_2025 gt ON tz."LocationID" = gt."PULocationID"
+-- WHERE gt.lpep_pickup_datetime >= '2025-11-18'
+--   AND gt.lpep_pickup_datetime < '2025-11-19'
+-- GROUP BY tz."Zone"
+-- ORDER BY total_amount DESC;
+
+-- Q6
+
+-- SELECT 
+--     zone."Zone" AS pu_zone, 
+--     dropoff."Zone" AS do_zone,
+--     trip."tip_amount"
+-- FROM green_taxi_2025  trip
+-- JOIN taxi_zones zone
+--   ON trip."PULocationID" = zone."LocationID"
+-- JOIN taxi_zones dropoff
+--   ON trip."DOLocationID" = dropoff."LocationID"
+-- WHERE trip.lpep_pickup_datetime >= '2025-11-01'
+--   AND trip.lpep_pickup_datetime < '2025-12-01'
+--   AND zone."Zone" = 'East Harlem North'
+-- ORDER BY trip."tip_amount" DESC 
+-- LIMIT 1;
+
+
+
